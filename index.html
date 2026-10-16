@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>بهار بیوتی | سالن زیبایی</title>
+<style>
+:root{--pink:#b94f78;--light:#fff5f8;--gold:#c5a05b;--dark:#35232c}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#fff9fb;color:var(--dark)}
+header{background:linear-gradient(120deg,#51283f,#b94f78);color:white;padding:24px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header h1{margin:0;font-size:26px}
+header p{margin:8px 0 0;color:#ffe5ee}
+button,.btn{background:var(--pink);color:white;border:0;padding:11px 16px;border-radius:10px;cursor:pointer;font:inherit}
+button:hover{opacity:.88}
+header button{background:#fff;color:#7d3152}
+nav{display:flex;gap:8px;flex-wrap:wrap;padding:14px 5%;background:white;box-shadow:0 2px 12px #0000000b}
+nav button{background:#f7e5ec;color:#7d3152}
+main{max-width:1150px;margin:25px auto;padding:0 16px}
+.hero{padding:35px 24px;border-radius:20px;background:linear-gradient(120deg,#f7dce6,#fff4df);margin-bottom:24px}
+.hero h2{font-size:30px;margin-top:0}
+.muted{color:#856f79;font-size:13px;line-height:1.9}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:white;border:1px solid #f0dfe6;border-radius:16px;padding:18px;box-shadow:0 5px 18px #4d1f3510}
+.card h3{margin-top:0}
+.price{font-weight:bold;color:var(--pink)}
+input,select,textarea{width:100%;padding:11px;margin:7px 0 13px;border:1px solid #e6cdd8;border-radius:9px;font:inherit;background:white}
+label{font-size:13px}
+form{margin-top:12px}
+.section{margin:25px 0}
+.hidden{display:none!important}
+table{width:100%;border-collapse:collapse;background:white;min-width:570px}
+th,td{padding:12px;text-align:right;border-bottom:1px solid #f0dfe6;font-size:13px}
+th{background:#f9eaf0}
+.table-wrap{overflow-x:auto;border-radius:12px}
+.badge{background:#f8e2eb;color:#8b3658;border-radius:20px;padding:5px 9px;font-size:12px}
+.danger{background:#a72f43}
+.secondary{background:#806775}
+.media{width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-top:8px}
+footer{text-align:center;padding:25px;background:#51283f;color:white;margin-top:40px}
+.notice{padding:12px;border-radius:10px;background:#fff0d6;margin:12px 0;font-size:13px;line-height:1.9}
+@media(max-width:600px){header h1{font-size:22px}.hero h2{font-size:24px}nav button{flex:1}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>🌸 بهار بیوتی</h1>
+    <p>زیبایی تو، هنر ماست</p>
+  </div>
+  <div id="userArea">
+    <button onclick="showLogin()">ورود آزمایشی</button>
+  </div>
+</header>
+
+<nav>
+  <button onclick="showPage('home')">صفحه اصلی</button>
+  <button onclick="showPage('services')">خدمات و قیمت‌ها</button>
+  <button onclick="showPage('appointment')">رزرو نوبت</button>
+  <button onclick="showPage('dashboard')">پنل مدیریت</button>
+</nav>
+
+<main>
+  <section id="home">
+    <div class="hero">
+      <h2>به دنیای زیبایی خوش آمدید ✨</h2>
+      <p>خدمات زیبایی با محیطی آرام، کیفیت حرفه‌ای و توجه به سلیقه شما.</p>
+      <button onclick="showPage('services')">مشاهده خدمات</button>
+      <button onclick="showPage('appointment')">رزرو نوبت</button>
+    </div>
+    <h2>خدمات محبوب ما</h2>
+    <div id="homeServices" class="grid"></div>
+    <p class="muted">نسخه آزمایشی بهار بیوتی</p>
+  </section>
+
+  <section id="services" class="hidden">
+    <h2>خدمات آرایشگاه</h2>
+    <p class="muted">برای مشاهده جزئیات هر خدمت، کارت آن را بررسی کنید.</p>
+    <div id="serviceList" class="grid"></div>
+  </section>
+
+  <section id="appointment" class="hidden">
+    <div class="card">
+      <h2>رزرو نوبت</h2>
+      <form id="appointmentForm">
+        <label>نام مشتری</label>
+        <input name="customer" required>
+        <label>شماره تماس (اختیاری)</label>
+        <input name="phone" type="tel">
+        <label>خدمت موردنظر</label>
+        <select name="service" id="appointmentService" required></select>
+        <label>تاریخ نوبت</label>
+        <input name="date" type="date" required>
+        <label>ساعت نوبت</label>
+        <input name="time" type="time" required>
+        <label>توضیحات</label>
+        <textarea name="notes" rows="3"></textarea>
+        <button>ثبت نوبت آزمایشی</button>
+      </form>
+      <p class="muted">ثبت نوبت به معنی تأیید نهایی زمان توسط آرایشگاه نیست.</p>
+    </div>
+  </section>
+
+  <section id="login" class="hidden">
+    <div class="card">
+      <h2>ورود آزمایشی</h2>
+      <div class="notice">این ورود فقط برای آزمایش است و رمز واقعی یا احراز هویت امن ندارد.</div>
+      <label>نام نمایشی</label>
+      <input id="loginName" placeholder="مثلاً مدیر سالن">
+      <label>انتخاب نقش</label>
+      <select id="loginRole">
+        <option value="customer">مشتری</option>
+        <option value="admin">مدیر</option>
+        <option value="accountant">حسابدار</option>
+      </select>
+      <button onclick="login()">ورود به سایت</button>
+      <button class="secondary" onclick="showPage('home')">بازگشت</button>
+    </div>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <h2>پنل بهار بیوتی</h2>
+    <div class="notice" id="roleNotice">برای استفاده از پنل، ورود آزمایشی انجام بده.</div>
+    <div id="dashboardContent"></div>
+  </section>
+</main>
+
+<footer>بهار بیوتی 🌸 | سامانه آزمایشی سالن زیبایی</footer>
+
+<script>
+const defaults=[
+ {id:1,name:"کوتاهی مو",price:350000,description:"کوتاهی و فرم‌دهی مو",media:"",video:""},
+ {id:2,name:"رنگ مو",price:1200000,description:"رنگ و تغییر استایل مو",media:"",video:""},
+ {id:3,name:"میکاپ",price:900000,description:"آرایش مناسب مهمانی و مراسم",media:"",video:""},
+ {id:4,name:"ناخن",price:450000,description:"مانیکور و خدمات زیبایی ناخن",media:"",video:""}
+];
+const load=(key,fallback)=>{try{return JSON.parse(localStorage.getItem("bahar_"+key))??fallback}catch{return fallback}};
+const save=(key,data)=>localStorage.setItem("bahar_"+key,JSON.stringify(data));
+let services=load("services",defaults);
+let appointments=load("appointments",[]);
+let staff=load("staff",[]);
+let expenses=load("expenses",[]);
+let payments=load("payments",[]);
+let currentUser=load("user",null);
+
+function money(n){return Number(n||0).toLocaleString("fa-IR")+" تومان"}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function showPage(id){
+ document.querySelectorAll("main>section").forEach(s=>s.classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
+ if(id==="services")renderServices();
+ if(id==="appointment")fillServiceOptions();
+ if(id==="dashboard")renderDashboard();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function showLogin(){showPage("login")}
+function login(){
+ const name=document.getElementById("loginName").value.trim()||"کاربر آزمایشی";
+ currentUser={name,role:document.getElementById("loginRole").value};
+ save("user",currentUser);updateUserArea();showPage("dashboard");
+}
+function logout(){currentUser=null;localStorage.removeItem("bahar_user");updateUserArea();showPage("home")}
+function updateUserArea(){
+ const area=document.getElementById("userArea");
+ area.innerHTML=currentUser
+ ?`<span>${esc(currentUser.name)}</span> <button onclick="showPage('dashboard')">پنل من</button> <button onclick="logout()">خروج</button>`
+ :`<button onclick="showLogin()">ورود آزمایشی</button>`;
+}
+function mediaHtml(s){
+ let out="";
+ if(s.media)out+=`<img class="media" src="${esc(s.media)}" alt="${esc(s.name)}">`;
+ if(s.video)out+=`<video class="media" controls src="${esc(s.video)}"></video>`;
+ return out;
+}
+function serviceCard(s){
+ return `<article class="card"><h3>${esc(s.name)}</h3>${mediaHtml(s)}
+ <p>${esc(s.description)}</p><p class="price">${money(s.price)}</p>
+ <button onclick="chooseService(${s.id})">رزرو این خدمت</button></article>`;
+}
+function renderServices(){
+ document.getElementById("serviceList").innerHTML=services.map(serviceCard).join("")||"<p>هنوز خدمتی ثبت نشده است.</p>";
+}
+function renderHome(){
+ document.getElementById("homeServices").innerHTML=services.slice(0,3).map(serviceCard).join("");
+ renderServices();fillServiceOptions();
+}
+function fillServiceOptions(){
+ const select=document.getElementById("appointmentService");
+ select.innerHTML=services.map(s=>`<option value="${s.id}">${esc(s.name)} — ${money(s.price)}</option>`).join("");
+}
+function chooseService(id){
+ showPage("appointment");document.getElementById("appointmentService").value=String(id);
+}
+document.getElementById("appointmentForm").addEventListener("submit",e=>{
+ e.preventDefault();const f=new FormData(e.target);
+ const service=services.find(s=>s.id===Number(f.get("service")));
+ appointments.push({id:Date.now(),customer:f.get("customer"),phone:f.get("phone"),serviceId:Number(f.get("service")),service:service?.name||"خدمت حذف‌شده",price:service?.price||0,date:f.get("date"),time:f.get("time"),notes:f.get("notes"),status:"در انتظار"});
+ save("appointments",appointments);e.target.reset();
+ alert("نوبت آزمایشی ثبت شد.");showPage("home");
+});
+function requireRole(roles){
+ if(!currentUser){return false}
+ return roles.includes(currentUser.role);
+}
+function renderDashboard(){
+ const content=document.getElementById("dashboardContent");
+ const notice=document.getElementById("roleNotice");
+ if(!currentUser){
+  notice.textContent="برای استفاده از پنل، ابتدا از بخش ورود آزمایشی نقش خود را انتخاب کن.";
+  content.innerHTML='<button onclick="showLogin()">ورود آزمایشی</button>';return;
+ }
+ notice.textContent="کاربر: "+currentUser.name+" | نقش: "+({admin:"مدیر",accountant:"حسابدار",customer:"مشتری"}[currentUser.role]);
+ if(currentUser.role==="customer"){
+  content.innerHTML=`<div class="card"><h3>نوبت‌های ثبت‌شده</h3>${appointments.filter(a=>a.customer===currentUser.name).map(a=>`<p>${esc(a.service)} — ${esc(a.date)}، ${esc(a.time)} — ${esc(a.status)}</p>`).join("")||"هنوز نوبتی با این نام ثبت نشده است."}</div>`;
+  return;
+ }
+ content.innerHTML=`
+ <div class="grid section">
+  <div class="card"><p>تعداد نوبت‌ها</p><h2>${appointments.length}</h2></div>
+  <div class="card"><p>درآمد ثبت‌شده</p><h2>${money(payments.reduce((a,p)=>a+Number(p.amount),0))}</h2></div>
+  <div class="card"><p>هزینه‌ها</p><h2>${money(expenses.reduce((a,p)=>a+Number(p.amount),0))}</h2></div>
+  <div class="card"><p>تعداد کارکنان</p><h2>${staff.length}</h2></div>
+ </div>
+ <div class="card section">
+  <h3>نوبت‌ها</h3><div class="table-wrap"><table><thead><tr><th>مشتری</th><th>خدمت</th><th>تاریخ</th><th>ساعت</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+  <tbody>${appointments.map(a=>`<tr><td>${esc(a.customer)}</td><td>${esc(a.service)}</td><td>${esc(a.date)}</td><td>${esc(a.time)}</td><td>${esc(a.status)}</td><td><button onclick="setAppointmentStatus(${a.id},'تأیید شد')">تأیید</button> <button class="danger" onclick="deleteAppointment(${a.id})">حذف</button></td></tr>`).join("")||'<tr><td colspan="6">هنوز نوبتی ثبت نشده است.</td></tr>'}</tbody></table></div>
+ </div>
+ ${currentUser.role==="admin"?adminForms():""}
+ <div class="card section">
+  <h3>ثبت درآمد</h3>
+  <form id="paymentForm">
+   <label>کارمند</label><select name="staffId"><option value="">بدون انتخاب کارمند</option>${staff.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("")}</select>
+   <label>خدمت</label><select name="serviceId">${services.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("")}</select>
+   <label>مبلغ (تومان)</label><input type="number" name="amount" min="0" required>
+   <label>تاریخ</label><input type="date" name="date" required>
+   <button>ثبت درآمد</button>
+  </form>
+ </div>
+ <div class="card section">
+  <h3>ثبت هزینه</h3>
+  <form id="expenseForm"><label>عنوان هزینه</label><input name="title" required>
+  <label>مبلغ (تومان)</label><input name="amount" type="number" min="0" required>
+  <label>تاریخ</label><input name="date" type="date" required><button>ثبت هزینه</button></form>
+ </div>
+ <div class="card section"><h3>گزارش درآمد کارکنان</h3><div class="table-wrap"><table><thead><tr><th>کارمند</th><th>درآمد ثبت‌شده</th></tr></thead><tbody>
+ ${staff.map(s=>`<tr><td>${esc(s.name)}</td><td>${money(payments.filter(p=>String(p.staffId)===String(s.id)).reduce((n,p)=>n+Number(p.amount),0))}</td></tr>`).join("")||'<tr><td colspan="2">هنوز کارمندی ثبت نشده است.</td></tr>'}
+ </tbody></table></div></div>
+ <div class="card section"><h3>گزارش مالی</h3><p>کل درآمد: <b>${money(payments.reduce((n,p)=>n+Number(p.amount),0))}</b></p>
+ <p>کل هزینه: <b>${money(expenses.reduce((n,p)=>n+Number(p.amount),0))}</b></p>
+ <p>مانده: <b>${money(payments.reduce((n,p)=>n+Number(p.amount),0)-expenses.reduce((n,p)=>n+Number(p.amount),0))}</b></p>
+ <h4>ریز هزینه‌ها</h4>${expenses.map(x=>`<p>${esc(x.title)} — ${money(x.amount)} — ${esc(x.date)}</p>`).join("")||"هزینه‌ای ثبت نشده است."}</div>`;
+ document.getElementById("paymentForm").addEventListener("submit",e=>{
+  e.preventDefault();const f=new FormData(e.target);
+  payments.push({id:Date.now(),staffId:f.get("staffId"),serviceId:f.get("serviceId"),amount:Number(f.get("amount")),date:f.get("date")});
+  save("payments",payments);renderDashboard();
+ });
+ document.getElementById("expenseForm").addEventListener("submit",e=>{
+  e.preventDefault();const f=new FormData(e.target);
+  expenses.push({id:Date.now(),title:f.get("title"),amount:Number(f.get("amount")),date:f.get("date")});
+  save("expenses",expenses);renderDashboard();
+ });
+}
+function adminForms(){
+ return `<div class="card section"><h3>افزودن خدمت</h3>
+ <form id="serviceForm"><label>نام خدمت</label><input name="name" required>
+ <label>قیمت (تومان)</label><input name="price" type="number" min="0" required>
+ <label>توضیحات</label><textarea name="description"></textarea>
+ <label>نشانی اینترنتی عکس (اختیاری)</label><input name="media" type="url" placeholder="https://...">
+ <label>نشانی اینترنتی فیلم (اختیاری)</label><input name="video" type="url" placeholder="https://...">
+ <button>افزودن خدمت</button></form>
+ <h4>خدمات فعلی</h4>${services.map(s=>`<p>${esc(s.name)} — ${money(s.price)} <button class="danger" onclick="deleteService(${s.id})">حذف</button></p>`).join("")||"خدمتی ثبت نشده است."}</div>
+ <div class="card section"><h3>افزودن کارمند</h3>
+ <form id="staffForm"><label>نام کارمند</label><input name="name" required>
+ <label>درصد سهم کارمند از خدمات (اختیاری)</label><input name="share" type="number" min="0" max="100" value="0">
+ <button>ثبت کارمند</button></form>
+ <h4>کارکنان</h4>${staff.map(s=>`<p>${esc(s.name)} — سهم ${Number(s.share)||0}٪ <button class="danger" onclick="deleteStaff(${s.id})">حذف</button></p>`).join("")||"هنوز کارمندی ثبت نشده است."}</div>`;
+}
+function setAppointmentStatus(id,status){
+ appointments=appointments.map(a=>a.id===id?{...a,status}:a);save("appointments",appointments);renderDashboard();
+}
+function deleteAppointment(id){
+ if(confirm("این نوبت حذف شود؟")){appointments=appointments.filter(a=>a.id!==id);save("appointments",appointments);renderDashboard()}
+}
+function deleteService(id){
+ if(confirm("این خدمت حذف شود؟")){services=services.filter(s=>s.id!==id);save("services",services);renderDashboard();renderHome()}
+}
+function deleteStaff(id){
+ if(confirm("این کارمند حذف شود؟")){staff=staff.filter(s=>s.id!==id);save("staff",staff);renderDashboard()}
+}
+document.addEventListener("submit",e=>{
+ if(e.target.id==="serviceForm"){
+  e.preventDefault();const f=new FormData(e.target);
+  services.push({id:Date.now(),name:f.get("name"),price:Number(f.get("price")),description:f.get("description"),media:f.get("media"),video:f.get("video")});
+  save("services",services);renderDashboard();renderHome();
+ }
+ if(e.target.id==="staffForm"){
+  e.preventDefault();const f=new FormData(e.target);
+  staff.push({id:Date.now(),name:f.get("name"),share:Number(f.get("share"))||0});
+  save("staff",staff);renderDashboard();
+ }
+});
+updateUserArea();renderHome();
+</script>
+</body>
+</html>

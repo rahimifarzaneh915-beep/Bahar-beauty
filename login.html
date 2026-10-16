@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ورود | بهار بیوتی</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/login.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">🌸 بهار بیوتی</a>
+    <a class="btn btn-light" href="index.html">بازگشت به سایت</a>
+  </header>
+  <main class="container">
+    <section class="panel" style="max-width:560px;margin:35px auto">
+      <p class="eyebrow">خوش آمدی</p>
+      <h1>ورود آزمایشی</h1>
+      <div class="notice">
+        این نسخه برای آزمایش است. رمز عبور و احراز هویت واقعی ندارد؛ نقش‌ها فقط نمایشی هستند.
+      </div>
+      <form id="login-form">
+        <label for="name">نام نمایشی</label>
+        <input id="name" name="name" placeholder="نام خود را وارد کن" required>
+        <label for="role">نقش آزمایشی</label>
+        <select id="role" name="role">
+          <option value="customer">مشتری</option>
+          <option value="admin">مدیر آرایشگاه</option>
+          <option value="accountant">حسابدار</option>
+        </select>
+        <button class="btn" type="submit">ورود به پنل</button>
+      </form>
+      <p class="muted">پس از ورود، پنل متناسب با نقش انتخابی نمایش داده می‌شود.</p>
+    </section>
+  </main>
+</body>
+</html>

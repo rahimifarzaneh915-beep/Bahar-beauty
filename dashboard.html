@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>پنل بهار بیوتی</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/dashboard.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">🌸 بهار بیوتی</a>
+    <div>
+      <a class="btn btn-light" href="index.html">صفحه اصلی</a>
+      <button class="btn btn-light" id="logout">خروج</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="eyebrow">مدیریت سالن زیبایی</p>
+    <h1>پنل کاربری</h1>
+    <p id="welcome" class="muted"></p>
+    <div class="notice">نسخه آزمایشی: اطلاعات در مرورگر ذخیره می‌شوند. این پنل هنوز ورود امن یا همگام‌سازی آنلاین ندارد.</div>
+
+    <section id="customer-panel" class="section hidden">
+      <div class="panel">
+        <h2>نوبت‌های من</h2>
+        <div id="my-appointments"></div>
+      </div>
+    </section>
+
+    <section id="staff-panel" class="section hidden">
+      <div class="stat-grid" id="stats"></div>
+
+      <div id="appointment-panel" class="panel section">
+        <h2>مدیریت نوبت‌ها</h2>
+        <div class="table-wrap" id="appointment-table"></div>
+      </div>
+
+      <div id="service-management" class="panel section hidden">
+        <h2>افزودن خدمت جدید</h2>
+        <form id="service-form">
+          <label>نام خدمت</label>
+          <input name="name" required>
+          <label>قیمت به تومان</label>
+          <input name="price" type="number" min="0" required>
+          <label>توضیحات خدمت</label>
+          <textarea name="description" rows="2"></textarea>
+          <label>نشانی اینترنتی عکس (اختیاری)</label>
+          <input name="image" type="url" placeholder="https://...">
+          <label>نشانی اینترنتی فیلم (اختیاری)</label>
+          <input name="video" type="url" placeholder="https://...">
+          <button class="btn" type="submit">ثبت خدمت</button>
+        </form>
+        <h3>خدمات موجود</h3>
+        <div id="service-table"></div>
+      </div>
+
+      <div id="staff-management" class="panel section hidden">
+        <h2>مدیریت کارکنان</h2>
+        <form id="staff-form">
+          <label>نام کارمند</label>
+          <input name="name" required>
+          <label>درصد سهم کارمند از درآمد خدمت</label>
+          <input name="share" type="number" min="0" max="100" value="0" required>
+          <button class="btn" type="submit">ثبت کارمند</button>
+        </form>
+        <div id="staff-table"></div>
+      </div>
+
+      <div id="finance-panel" class="panel section">
+        <h2>ثبت درآمد</h2>
+        <form id="payment-form">
+          <label>خدمت انجام‌شده</label>
+          <select name="serviceId" id="payment-service" required></select>
+          <label>کارمند انجام‌دهنده</label>
+          <select name="staffId" id="payment-staff" required></select>
+          <label>مبلغ دریافتی به تومان</label>
+          <input name="amount" type="number" min="0" required>
+          <label>تاریخ دریافت</label>
+          <input name="date" type="date" required>
+          <button class="btn" type="submit">ثبت درآمد</button>
+        </form>
+
+        <h2>ثبت هزینه</h2>
+        <form id="expense-form">
+          <label>عنوان هزینه</label>
+          <input name="title" required>
+          <label>مبلغ به تومان</label>
+          <input name="amount" type="number" min="0" required>
+          <label>تاریخ هزینه</label>
+          <input name="date" type="date" required>
+          <button class="btn" type="submit">ثبت هزینه</button>
+        </form>
+      </div>
+
+      <div class="panel section">
+        <h2>گزارش مالی</h2>
+        <div id="financial-report"></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
